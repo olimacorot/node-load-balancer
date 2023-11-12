@@ -1,0 +1,18 @@
+version: '3.5'
+
+services:
+  load-balancer-app:
+    build: .
+    command: npm run start:prod
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    ports:
+      - "8080:8080"
+    networks:
+      - load-balancer
+
+networks:
+  load-balancer:
+    driver: bridge
+    name: server_load_balancer
